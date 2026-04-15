@@ -1,0 +1,21 @@
+@import "tailwindcss"; 
+
+@theme {
+  --color-base: #eff1f5;
+  --color-mantle: #e6e9ef;
+
+  --color-text: #4c4f69;
+  --color-subtext: #6c6f85;
+
+  --color-accent: #40a02b;
+  --color-accent-soft: #a6d189;
+
+  --color-highlight: #1e66f5;
+  --color-success: #22c55e;
+  --color-danger: #e64553;
+
+  --radius-apple: 12px;
+  --radius-apple-lg: 20px;
+  
+}
+
