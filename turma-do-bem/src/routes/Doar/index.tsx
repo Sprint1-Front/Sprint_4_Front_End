@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import felizImg from '../assets/img/crianca-feliz.png';
-import tristeImg from '../assets/img/crianca-triste.png';
+import felizImg from '../../assets/img/crianca-feliz.png';
+import tristeImg from '../../assets/img/crianca-triste.png';
 
 export default function DoacaoPage() {
   const [doou, setDoou] = useState(false);

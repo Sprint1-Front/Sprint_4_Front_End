@@ -1,11 +1,11 @@
 import React from 'react';
-import feitosaImg from '../assets/integrantes/feitosa.jpg';
-import munizImg from '../assets/integrantes/muniz.png';
-import matudaImg from '../assets/integrantes/matuda.jpg';
+import feitosaImg from '../../assets/integrantes/feitosa.jpg';
+import munizImg from '../../assets/integrantes/muniz.png';
+import matudaImg from '../../assets/integrantes/matuda.jpg';
 
 
-import GithubIcon from '../assets/icons/github.svg?react';
-import LinkedinIcon from '../assets/icons/linkedin.svg?react';
+import GithubIcon from '../../assets/icons/github.svg';
+import LinkedinIcon from '../../assets/icons/linkedin.svg';
 
 interface Integrante {
   nome: string;

@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Button } from "../components/ui/Button"; // Reutilizando seu componente UI
+import { Button } from "../../components/ui/Button"; // Reutilizando seu componente UI
 
 // Definição da interface para os dados do formulário
 interface DentistaFormData {

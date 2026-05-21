@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import criancaTristeImg from '../assets/img/turma-do-bem-hero.jpg';
-import '../index.css';
-import Sobre from './Sobre';
+import criancaTristeImg from '../../assets/img/turma-do-bem-hero.jpg';
+import '../../index.css';
+import Sobre from '../Sobre/index';
 
 const Home: React.FC = () => {
   return (

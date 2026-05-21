@@ -1,19 +1,19 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
-import Home from './pages/Home';
-import CadastroAluno from './pages/CadastroAluno';
-import Doar from './pages/Doar';
-import Integrantes from './pages/Integrantes';
-import Cadastro from './pages/Cadastro';
-import Voluntario from './pages/SejaVoluntario';
-import Sobre from './pages/Sobre';
-import Contato from './pages/Contato';
-import Faq from './pages/Faq';
-import Solucao from './pages/Solucao';
-import CadastroDentista from './pages/CadastroDentista';
+import Home from './routes/Home';
+import CadastroAluno from './routes/CadastroAlu';
+import Doar from './routes/Doar';
+import Integrantes from './routes/Integrantes/index';
+import Cadastro from './routes/Cadastro';
+import Voluntario from './routes/Voluntario';
+import Sobre from './routes/Sobre/index';
+import Contato from './routes/Contato/index';
+import Faq from './routes/Faq/index';
+import Solucao from './routes/Solucao/index';
+import CadastroDentista from './routes/CadastroDent';
 import './index.css';
-import NossosProjetos from './pages/NossosProjetos';
+import NossosProjetos from './routes/Projetos';
 
 
 
