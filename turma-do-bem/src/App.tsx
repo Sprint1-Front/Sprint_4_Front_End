@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
-import Home from './routes/Home';
+import Home from './routes/Home/index';
 import CadastroAluno from './routes/CadastroAlu';
 import Doar from './routes/Doar';
 import Integrantes from './routes/Integrantes/index';
@@ -15,8 +15,6 @@ import CadastroDentista from './routes/CadastroDent';
 import './index.css';
 import NossosProjetos from './routes/Projetos';
 
-
-
 function App() {
   return (
     <Router>
@@ -28,23 +26,21 @@ function App() {
         {/* Conteúdo */}
         <main className="flex-1 px-4 md:px-6">
           <Routes>
+            {/* Institucional e Páginas Gerais */}
             <Route path="/" element={<Home />} />
             <Route path="/doar" element={<Doar />} />
             <Route path="/integrantes" element={<Integrantes />} />
             <Route path="/sobre" element={<Sobre />} />
             <Route path="/contato" element={<Contato />} />
             <Route path="/faq" element={<Faq />} />
-            <Route path="/cadastro" element={<Cadastro />} />
-            <Route path="/seja-voluntario" element={<Voluntario />} />
             <Route path="/solucao" element={<Solucao />} />
             <Route path="/nossos-projetos" element={<NossosProjetos />} />
 
-            {/* Cadastros */}
-            <Route path="/cadastrar-aluno" element={<CadastroAluno />} />
-            <Route path="/cadastrar" element={<Cadastro />} />
+            {/* Cadastros (Duplicações Removidas) */}
+            <Route path="/cadastro" element={<Cadastro />} />
             <Route path="/seja-voluntario" element={<Voluntario />} />
+            <Route path="/cadastrar-aluno" element={<CadastroAluno />} />
             <Route path="/cadastro-dentista" element={<CadastroDentista />} />
-
 
             {/* 404 */}
             <Route
@@ -57,12 +53,13 @@ function App() {
                   <p className="text-subtext text-lg leading-relaxed">
                     Página não encontrada.
                   </p>
-                  <a
-                    href="/"
+                  {/* Corrigido: Usando Link para não recarregar a SPA */}
+                  <Link
+                    to="/"
                     className="mt-4 px-6 py-3 bg-accent text-white rounded-apple font-semibold hover:brightness-110 transition"
                   >
                     Voltar para início
-                  </a>
+                  </Link>
                 </div>
               }
             />
