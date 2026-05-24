@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "../../components/ui/Button";
 
 export default function EditarDentista() {
-  const { id } = useParams<string>();
+  const { cro } = useParams<string>();
   const navigate = useNavigate();
   const [dentista, setDentista] = useState<TipoDentista>({
     nome: "",
@@ -25,8 +25,9 @@ export default function EditarDentista() {
   
   useEffect(() => {
     const callDentista = async () => {
+      if (!cro) return;
       try {
-        const response = await fetch(`http://localhost:3000/dentistas/${id}`);
+        const response = await fetch(`http://localhost:8080/dentistas/${cro}`);
 
         if (response.ok) {
           const data: TipoDentista = await response.json();
@@ -47,11 +48,11 @@ export default function EditarDentista() {
     };
 
     callDentista();
-  }, [id,setValue]);
+  }, [cro,setValue]);
 
   const onSubmit = async (data: TipoDentista) => {
     try {
-      const response = await fetch(`http://localhost:3000/dentistas/${id}`, {
+      const response = await fetch(`http://localhost:8080/dentistas/${cro}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
