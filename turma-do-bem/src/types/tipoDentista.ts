@@ -1,4 +1,4 @@
-export type TipoProfessor = {
+export type TipoDentista = {
 	nome: string;
     cidade: string;
     contato: string;
