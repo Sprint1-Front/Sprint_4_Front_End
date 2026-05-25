@@ -11,10 +11,13 @@ import Sobre from './routes/Sobre/index';
 import Contato from './routes/Contato/index';
 import Faq from './routes/Faq/index';
 import Solucao from './routes/Solucao/index';
+import CadastroDentista from './routes/CadastroDent';
+import Dentista from './routes/Dentista';
 import Error from './routes/Error/index';
 import EditarDentista from './routes/EditarDentista';
 import CadastroDent from './routes/CadastroDent';
 import Dentistas from './routes/CadastroDent';
+
 import './index.css';
 import NossosProjetos from './routes/Projetos';
 
@@ -42,6 +45,8 @@ function App() {
             {/* Cadastros (Duplicações Removidas) */}
             <Route path="/cadastro" element={<Cadastro />} />
             <Route path="/seja-voluntario" element={<Voluntario />} />
+            <Route path="/cadastro-dentista" element={<CadastroDentista />} />
+            <Route path="/dentista" element={<Dentista />} />
             <Route path="/cadastrar-aluno" element={<CadastroAluno />} />
             <Route path="/cadastro-dentista" element={<CadastroDent />} />
 
