@@ -15,6 +15,9 @@ import Solucao from './routes/Solucao/index.tsx'
 import Doar from './routes/Doar/index.tsx'
 import Integrantes from './routes/Integrantes/index.tsx'
 import Cadastro from './routes/Cadastro/index.tsx'
+import SejaVoluntario from './routes/Voluntario/index.tsx'
+import CadastroAluno from './routes/CadastroAlu/index.tsx'
+import CadastroDentista from './routes/CadastroDent/index.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 
@@ -36,6 +39,9 @@ const router = createBrowserRouter([
       { path: "/doar", element: <Doar /> },
       { path: "/integrantes", element: <Integrantes /> },
       { path: "/cadastro", element: <Cadastro /> },
+      { path: "/seja-voluntario", element: <SejaVoluntario /> },
+      { path: "/cadastrar-aluno", element: <CadastroAluno /> },
+      { path: "/cadastro-dentista", element: <CadastroDentista /> },
       { path: "*", element: <Error /> },
     ],
   },
