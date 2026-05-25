@@ -1,5 +1,7 @@
 # Turma do Bem - Website Institucional (Sprint 3)
 
+link - github https://github.com/Sprint1-Front/Sprint_4_Front_End
+
 <p align="center">
   <a href="https://github.com/Sprint1-Front/Sprint_3_Front_End"><img src="https://img.shields.io/badge/github-repo-blue?logo=github" alt="GitHub"></a>
   <img src="https://img.shields.io/badge/status-em%20andamento-yellow" alt="Status">
@@ -8,6 +10,12 @@
   <img src="https://img.shields.io/badge/tecnologias-TYPESCRIPT-blue" alt="Tecnologias">
   <img src="https://img.shields.io/badge/tecnologias-GOOGLE%20FONTS-blue" alt="Tecnologias">
 </p>
+
+# GITHUB
+
+<a href="https://github.com/Sprint1-Front/Sprint_4_Front_End">
+  <img src="https://img.shields.io/badge/github-repo-blue?logo=github" alt="GitHub">
+</a>
 
 ## 📖 Sobre o Projeto
 Este projeto consiste no desenvolvimento de um website institucional para a **Turma do Bem**, a maior rede de voluntariado especializado do mundo. O site foi criado como parte de um desafio académico (*Challenge de Front-End Design*) com o objetivo de dar visibilidade à missão da ONG: oferecer tratamento odontológico gratuito a jovens e mulheres em situação de vulnerabilidade.
@@ -173,12 +181,12 @@ A estrutura de pastas está organizada da seguinte forma:
 
 # YOUTUBE
 
-[![YouTube](https://img.shields.io/badge/YouTube-red?logo=youtube&logoColor=white)](https://youtu.be/ljSt3OGyrxM)
+[![YouTube](https://img.shields.io/badge/YouTube-red?logo=youtube&logoColor=white)](https://youtu.be/0wsqSKZpPGw)
 
 ---
 
 # GITHUB
 
-<a href="https://github.com/Sprint1-Front/Sprint_3_Front_End">
+<a href="https://github.com/Sprint1-Front/Sprint_4_Front_End">
   <img src="https://img.shields.io/badge/github-repo-blue?logo=github" alt="GitHub">
 </a>
