@@ -12,6 +12,7 @@ import Contato from './routes/Contato/index';
 import Faq from './routes/Faq/index';
 import Solucao from './routes/Solucao/index';
 import CadastroDentista from './routes/CadastroDent';
+import Dentista from './routes/Dentista';
 import './index.css';
 import NossosProjetos from './routes/Projetos';
 
@@ -44,6 +45,7 @@ function App() {
             <Route path="/cadastrar" element={<Cadastro />} />
             <Route path="/seja-voluntario" element={<Voluntario />} />
             <Route path="/cadastro-dentista" element={<CadastroDentista />} />
+            <Route path="/dentista" element={<Dentista />} />
 
 
             {/* 404 */}

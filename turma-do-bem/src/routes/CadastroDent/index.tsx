@@ -1,124 +1,182 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import { Button } from "../../components/ui/Button"; // Reutilizando seu componente UI
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-// Definição da interface para os dados do formulário
-interface DentistaFormData {
-  nome: string;
-  email: string;
-  especialidade: string;
-  cidade: string;
-  telefone: string;
-  mensagem: string;
-}
+export const CadastroDentista: React.FC = () => {
+  const navigate = useNavigate();
 
-const CadastroDentista: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset
-  } = useForm<DentistaFormData>();
+  const [nome, setNome] = useState("");
+  const [cro, setCro] = useState("");
+  const [especialidade, setEspecialidade] = useState("");
+  const [cidade, setCidade] = useState("");
+  const [contato, setContato] = useState("");  // NOVO ESTADO
+  const [endereco, setEndereco] = useState(""); // NOVO ESTADO
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  const onSubmit = (data: DentistaFormData) => {
-    console.log("Dados do Dentista:", data);
-    alert("Inscrição enviada com sucesso! Nossa equipe entrará em contato.");
-    reset(); // Limpa o formulário após o envio
+  const API_URL = "http://localhost:8080/dentista";
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setErrorMsg(null);
+
+    // Montando o objeto exatamente com as 6 chaves que o seu DAO espera receber
+    const novoDentista = {
+      cro: cro.trim(),
+      nome: nome.trim(),
+      especialidade: especialidade.trim(),
+      cidade: cidade.trim(),
+      contato: contato.trim(), 
+      endereco: endereco.trim()   
+    };
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(novoDentista),
+      });
+
+      if (response.ok || response.status === 201) {
+        alert(`Dr(a). ${nome} cadastrado(a) com sucesso!`);
+        navigate("/seja-voluntario"); 
+      } else {
+        throw new Error(`Erro no servidor. Status: ${response.status}`);
+      }
+    } catch (error: any) {
+      console.error("Erro ao inserir dentista:", error);
+      setErrorMsg("Falha ao salvar o cadastro. Verifique a conexão com o Java.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-base flex items-center justify-center px-6 py-20 transition-colors duration-500">
-      <div className="w-full max-w-2xl bg-mantle rounded-apple-lg p-10 shadow-2xl border border-white/5 space-y-8">
+    <div className="min-h-screen bg-base text-text font-sans antialiased pt-20 px-6">
+      <div className="max-w-2xl mx-auto bg-mantle rounded-apple-lg p-8 shadow-2xl border border-white/5">
         
-        <div className="text-center space-y-2">
-          <h2 className="text-3xl font-bold tracking-tight text-text">
-            Seja um <span className="text-accent">Dentista do Bem</span>
-          </h2>
-          <p className="text-subtext text-sm">
-            Junte-se à maior rede de voluntariado especializado do mundo.
-          </p>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold text-accent">Novo Cadastro</h1>
+          <Link to="/seja-voluntario" className="text-sm text-subtext hover:text-accent transition">
+            Voltar para a rede
+          </Link>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          
-          {/* Nome Completo */}
-          <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-subtext mb-1">Nome Completo</label>
+        {errorMsg && (
+          <div className="mb-4 p-4 bg-danger/10 border border-danger/20 text-danger text-sm rounded-md">
+            {errorMsg}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="block text-sm font-medium text-subtext mb-1.5" htmlFor="nome">
+              Nome Completo
+            </label>
             <input
+              id="nome"
               type="text"
-              {...register("nome", { required: "O nome é obrigatório" })}
-              className={`w-full p-3 rounded-apple bg-base border outline-none transition
-              ${errors.nome ? "border-danger" : "border-white/10 focus:border-accent"}`}
-            />
-            {errors.nome && <span className="text-danger text-xs mt-1">{errors.nome.message}</span>}
-          </div>
-
-          {/* E-mail */}
-          <div>
-            <label className="block text-sm font-medium text-subtext mb-1">E-mail Profissional</label>
-            <input
-              type="email"
-              {...register("email", { 
-                required: "E-mail é obrigatório",
-                pattern: { value: /^\S+@\S+$/i, message: "E-mail inválido" }
-              })}
-              className="w-full p-3 rounded-apple bg-base border border-white/10 focus:border-accent outline-none transition"
+              required
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+              placeholder="Ex: Dr. Alexandre C. Jesus"
+              className="w-full p-3 bg-surface0/50 border border-white/10 rounded-lg outline-none text-text focus:ring-2 focus:ring-accent transition-all"
             />
           </div>
 
-          {/* Especialidade */}
-          <div>
-            <label className="block text-sm font-medium text-subtext mb-1">Especialidade</label>
-            <select
-              {...register("especialidade", { required: "Selecione uma área" })}
-              className="w-full p-3 rounded-apple bg-base border border-white/10 focus:border-accent outline-none transition appearance-none"
-            >
-              <option value="">Selecione...</option>
-              <option value="odontopediatria">Odontopediatria</option>
-              <option value="ortodontia">Ortodontia</option>
-              <option value="clinico-geral">Clínico Geral</option>
-              <option value="outros">Outros</option>
-            </select>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-subtext mb-1.5" htmlFor="cro">
+                Número do CRO
+              </label>
+              <input
+                id="cro"
+                type="text"
+                required
+                value={cro}
+                onChange={(e) => setCro(e.target.value)}
+                placeholder="Ex: 12345-SP"
+                className="w-full p-3 bg-surface0/50 border border-white/10 rounded-lg outline-none text-text focus:ring-2 focus:ring-accent transition-all"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-subtext mb-1.5" htmlFor="especialidade">
+                Especialidade
+              </label>
+              <input
+                id="especialidade"
+                type="text"
+                required
+                value={especialidade}
+                onChange={(e) => setEspecialidade(e.target.value)}
+                placeholder="Ex: Ortodontia"
+                className="w-full p-3 bg-surface0/50 border border-white/10 rounded-lg outline-none text-text focus:ring-2 focus:ring-accent transition-all"
+              />
+            </div>
           </div>
 
-          {/* Cidade */}
+          {/* NOVOS INPUTS ADICIONADOS AQUI */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-subtext mb-1.5" htmlFor="contato">
+                Contato (E-mail ou Telefone)
+              </label>
+              <input
+                id="contato"
+                type="text"
+                required
+                value={contato}
+                onChange={(e) => setContato(e.target.value)}
+                placeholder="Ex: alexandre@email.com"
+                className="w-full p-3 bg-surface0/50 border border-white/10 rounded-lg outline-none text-text focus:ring-2 focus:ring-accent transition-all"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-subtext mb-1.5" htmlFor="cidade">
+                Cidade
+              </label>
+              <input
+                id="cidade"
+                type="text"
+                required
+                value={cidade}
+                onChange={(e) => setCidade(e.target.value)}
+                placeholder="Ex: São Paulo"
+                className="w-full p-3 bg-surface0/50 border border-white/10 rounded-lg outline-none text-text focus:ring-2 focus:ring-accent transition-all"
+              />
+            </div>
+          </div>
+
           <div>
-            <label className="block text-sm font-medium text-subtext mb-1">Cidade</label>
+            <label className="block text-sm font-medium text-subtext mb-1.5" htmlFor="endereco">
+              Endereço do Consultório
+            </label>
             <input
+              id="endereco"
               type="text"
-              {...register("cidade", { required: "A cidade é obrigatória" })}
-              className="w-full p-3 rounded-apple bg-base border border-white/10 focus:border-accent outline-none transition"
+              required
+              value={endereco}
+              onChange={(e) => setEndereco(e.target.value)}
+              placeholder="Ex: Av. Paulista, 1106 - Bela Vista"
+              className="w-full p-3 bg-surface0/50 border border-white/10 rounded-lg outline-none text-text focus:ring-2 focus:ring-accent transition-all"
             />
           </div>
 
-          {/* Telefone */}
-          <div>
-            <label className="block text-sm font-medium text-subtext mb-1">Telefone/WhatsApp</label>
-            <input
-              type="tel"
-              {...register("telefone", { required: "O telefone é obrigatório" })}
-              className="w-full p-3 rounded-apple bg-base border border-white/10 focus:border-accent outline-none transition"
-            />
-          </div>
-
-          {/* Mensagem/Motivação */}
-          <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-subtext mb-1">Por que deseja ser voluntário?</label>
-            <textarea
-              rows={4}
-              {...register("mensagem")}
-              className="w-full p-3 rounded-apple bg-base border border-white/10 focus:border-accent outline-none transition resize-none"
-              placeholder="Conte-nos um pouco sobre sua motivação..."
-            />
-          </div>
-
-          {/* Botão de Envio */}
-          <div className="md:col-span-2 pt-4">
-            <Button type="submit" variant="primary" className="w-full py-3 bg-accent text-base font-bold rounded-apple transition-all hover:brightness-110 active:scale-95">
-              Finalizar Inscrição
-            </Button>
-          </div>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full mt-4 py-3.5 bg-accent text-mantle font-bold rounded-apple-md shadow-lg transition-all hover:brightness-110 active:scale-[0.99] disabled:opacity-50"
+          >
+            {isSubmitting ? "Salvando no Banco..." : "Finalizar Cadastro Voluntário"}
+          </button>
         </form>
+
       </div>
     </div>
   );
